@@ -17,9 +17,15 @@
             <a href="/category">Категория</a>
 
             @auth
-                <a href="/journalist">Журналист</a>
-                <a href="/admin">Админ</a>
-                <form method="POST" action="/logout">
+                @if(in_array(auth()->user()->role->name ?? '', ['Журналист', 'Администратор']))
+                    <a href="/journalist">Журналист</a>
+                @endif
+
+                @if((auth()->user()->role->name ?? '') === 'Администратор')
+                    <a href="/admin">Админ</a>
+                @endif
+
+                <form method="POST" action="/logout" style="display:inline">
                     @csrf
                     <button type="submit">Выйти ({{ auth()->user()->login }})</button>
                 </form>
