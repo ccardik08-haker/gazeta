@@ -15,21 +15,21 @@
         <div class="alert alert-success">{{ session('ok') }}</div>
     @endif
 
-    @forelse ($articles as $article)
+    @forelse ($texts as $text)
         <article class="article">
-            <h3>{{ $article->title }}</h3>
+            <h3>{{ $text->heading }}</h3>
             <p class="meta">
-                <span>Категория: {{ $article->category->name }}</span>
-                <span>Автор: {{ $article->user->login }}</span>
-                <span>{{ $article->created_at->format('d.m.Y H:i') }}</span>
+                <span>Категория: {{ $text->category->name }}</span>
+                <span>Автор: {{ $text->user->login }}</span>
+                <span>{{ $text->created_at->format('d.m.Y H:i') }}</span>
             </p>
-            <p>{{ $article->content }}</p>
+            <p>{{ $text->text }}</p>
         </article>
     @empty
         <p>Пока нет статей.</p>
     @endforelse
 
-    {{ $articles->links() }}
+    {{ $texts->links() }}
 </main>
 
 @include('components.footer')

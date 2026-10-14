@@ -6,10 +6,41 @@
 </head>
 <body>
 
-    @include('components.header')
+@include('components.header')
 
 <main>
     <h2>Панель администратора</h2>
+
+    <h3>Пользователи и роли</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Логин</th>
+                <th>Роль</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($users as $user)
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->login }}</td>
+                    <td>{{ $user->role->name ?? '—' }}</td>
+                    <td>
+                        <select name="role_id">
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}" @if($user->role_id == $role->id) selected @endif>
+                                    {{ $role->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <button type="button">Изменить</button>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
     <h3>Статьи</h3>
     <table>
@@ -17,7 +48,8 @@
             <tr>
                 <th>ID</th>
                 <th>Заголовок</th>
-                <th>Статус</th>
+                <th>Автор</th>
+                <th>Категория</th>
                 <th>Действия</th>
             </tr>
         </thead>
@@ -25,36 +57,16 @@
             <tr>
                 <td>1</td>
                 <td>Пример статьи</td>
-                <td>Опубликовано</td>
+                <td>admin</td>
+                <td>Наука</td>
                 <td>
-                    <button>Редактировать</button>
-                    <button>Заблокировать</button>
-                    <button>Удалить</button>
+                    <button type="button">Редактировать</button>
+                    <button type="button">Заблокировать</button>
+                    <button type="button">Удалить</button>
                 </td>
             </tr>
         </tbody>
     </table>
-
-    <h3>Пользователи</h3>
-    <form>
-        <p>
-            <label>Пользователь:</label><br>
-            <select name="user">
-                <option>admin</option>
-            </select>
-        </p>
-        <p>
-            <label>Новая роль:</label><br>
-            <select name="role">
-                <option>Читатель</option>
-                <option>Журналист</option>
-                <option>Администратор</option>
-            </select>
-        </p>
-        <p>
-            <button type="submit">Изменить роль</button>
-        </p>
-    </form>
 </main>
 
 @include('components.footer')

@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\Category;
+use App\Models\Text;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class TextController extends Controller
 {
     public function index()
     {
-        $articles = Article::with(['category', 'user'])
+        $texts = Text::with(['category', 'user'])
             ->latest()
             ->paginate(5);
 
-        return view('index', compact('articles'));
+        return view('index', compact('texts'));
     }
 
     public function category()
     {
         $category = Category::first();
 
-        $articles = Article::with(['category', 'user'])
+        $texts = Text::with(['category', 'user'])
             ->where('category_id', $category->id)
             ->latest()
             ->paginate(5);
 
-        return view('category', compact('category', 'articles'));
+        return view('category', compact('category', 'texts'));
     }
 
     public function create()
@@ -38,14 +38,14 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required|string|max:255',
+            'heading' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
-            'content' => 'required|string',
+            'text' => 'required|string',
         ]);
 
         $data['user_id'] = auth()->id();
 
-        Article::create($data);
+        Text::create($data);
 
         return redirect('/')->with('ok', 'Статья опубликована!');
     }

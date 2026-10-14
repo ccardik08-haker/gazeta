@@ -26,7 +26,7 @@
 
         <p>
             <label>Заголовок:</label><br>
-            <input type="text" name="title" value="{{ old('title') }}">
+            <input type="text" name="heading" value="{{ old('heading') }}">
         </p>
 
         <p>
@@ -40,7 +40,7 @@
 
         <p>
             <label>Текст статьи:</label><br>
-            <textarea name="content" rows="12">{{ old('content') }}</textarea>
+            <textarea name="text" rows="12">{{ old('text') }}</textarea>
         </p>
 
         <p>

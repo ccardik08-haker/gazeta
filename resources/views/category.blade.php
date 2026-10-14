@@ -11,20 +11,20 @@
 <main>
     <h2>Категория: {{ $category->name }}</h2>
 
-    @forelse ($articles as $article)
+    @forelse ($texts as $text)
         <article class="article">
-            <h3>{{ $article->title }}</h3>
+            <h3>{{ $text->heading }}</h3>
             <p class="meta">
-                <span>Автор: {{ $article->user->login }}</span>
-                <span>{{ $article->created_at->format('d.m.Y H:i') }}</span>
+                <span>Автор: {{ $text->user->login }}</span>
+                <span>{{ $text->created_at->format('d.m.Y H:i') }}</span>
             </p>
-            <p>{{ $article->content }}</p>
+            <p>{{ $text->text }}</p>
         </article>
     @empty
         <p>В этой категории пока нет статей.</p>
     @endforelse
 
-    {{ $articles->links() }}
+    {{ $texts->links() }}
 </main>
 
 @include('components.footer')

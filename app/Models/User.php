@@ -9,12 +9,17 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = ['login', 'password'];
+    protected $fillable = ['login', 'password', 'role_id'];
 
     protected $hidden = ['password', 'remember_token'];
 
-    public function articles()
+    public function role()
     {
-        return $this->hasMany(Article::class);
+        return $this->belongsTo(Role::class);
+    }
+
+    public function texts()
+    {
+        return $this->hasMany(Text::class);
     }
 }
