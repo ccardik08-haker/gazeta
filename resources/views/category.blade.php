@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Категория</title>
-</head>
-<body>
 
 @include('components.header')
 
@@ -28,6 +21,3 @@
 </main>
 
 @include('components.footer')
-
-</body>
-</html>

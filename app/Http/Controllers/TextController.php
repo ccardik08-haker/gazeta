@@ -11,6 +11,7 @@ class TextController extends Controller
     public function index()
     {
         $texts = Text::with(['category', 'user'])
+            ->where('is_blocked', false)
             ->latest()
             ->paginate(5);
 
@@ -23,6 +24,7 @@ class TextController extends Controller
 
         $texts = Text::with(['category', 'user'])
             ->where('category_id', $category->id)
+            ->where('is_blocked', false)
             ->latest()
             ->paginate(5);
 

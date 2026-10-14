@@ -25,9 +25,12 @@ Route::middleware(['auth', 'role:Журналист,Администратор']
 
 // Админ: только Администратор
 Route::middleware(['auth', 'role:Администратор'])->group(function () {
-    Route::get('/admin', function () {
-        $users = User::with('role')->get();
-        $roles = Role::all();
-        return view('admin', compact('users', 'roles'));
-    })->name('admin');
+    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+
+    Route::post('/admin/texts/{id}/delete', [\App\Http\Controllers\AdminController::class, 'destroyText']);
+    Route::post('/admin/texts/{id}/block', [\App\Http\Controllers\AdminController::class, 'toggleBlock']);
+    Route::get('/admin/texts/{id}/edit', [\App\Http\Controllers\AdminController::class, 'editText']);
+    Route::post('/admin/texts/{id}/update', [\App\Http\Controllers\AdminController::class, 'updateText']);
+
+    Route::post('/admin/users/{id}/role', [\App\Http\Controllers\AdminController::class, 'changeRole']);
 });
