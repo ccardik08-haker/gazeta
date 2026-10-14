@@ -18,9 +18,15 @@ class TextController extends Controller
         return view('index', compact('texts'));
     }
 
-    public function category()
+    public function categoriesList()
     {
-        $category = Category::first();
+        $categories = \App\Models\Category::withCount('texts')->get();
+        return view('categories', compact('categories'));
+    }
+
+    public function category($id)
+    {
+        $category = \App\Models\Category::findOrFail($id);
 
         $texts = Text::with(['category', 'user'])
             ->where('category_id', $category->id)

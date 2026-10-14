@@ -14,7 +14,7 @@
 
         <nav class="site-nav">
             <a href="/">Главная</a>
-            <a href="/category">Категория</a>
+            <a href="/category">Категории</a>
 
             @auth
                 @if(in_array(auth()->user()->role->name ?? '', ['Журналист', 'Администратор']))

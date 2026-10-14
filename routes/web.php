@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 // Публичные разделы
 Route::get('/', [TextController::class, 'index'])->name('home');
-Route::get('/category', [TextController::class, 'category'])->name('category');
+Route::get('/category', [TextController::class, 'categoriesList'])->name('categories');
+Route::get('/category/{id}', [TextController::class, 'category'])->name('category');
 
 // Авторизация
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
