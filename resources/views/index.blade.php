@@ -11,7 +11,7 @@
 
     @forelse ($texts as $text)
         <article class="article">
-            <h3>{{ $text->heading }}</h3>
+            <h3><a href="/text/{{ $text->id }}">{{ $text->heading }}</a></h3>
             <p class="meta">
                 <span>Категория: {{ $text->category->name }}</span>
                 <span>Автор: {{ $text->user->login }}</span>

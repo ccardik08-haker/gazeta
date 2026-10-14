@@ -24,6 +24,18 @@ class TextController extends Controller
         return view('categories', compact('categories'));
     }
 
+    public function show($id)
+    {
+        $text = Text::with(['category', 'user'])->findOrFail($id);
+
+        // если статья заблокирована — показываем 404 обычным пользователям
+        if ($text->is_blocked && (auth()->guest() || auth()->user()->role->name !== 'Администратор')) {
+            abort(404);
+        }
+
+        return view('text', compact('text'));
+    }
+
     public function category($id)
     {
         $category = \App\Models\Category::findOrFail($id);
